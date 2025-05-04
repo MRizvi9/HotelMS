@@ -31,7 +31,7 @@ const Navbar = () => {
           {/* Brand */}
           <a className="navbar-brand d-flex align-items-center" href="#!">
             <span style={{ color: '#5e9693' }}>Luxury</span>
-            <span style={{ color: '#fff' }}>Motel</span>
+            <span style={{ color: '#e4bd75   ' }}>Motel</span>
           </a>
 
           {/* Toggle button (mobile) */}
@@ -89,7 +89,7 @@ const Navbar = () => {
       </nav>
 
       {/* Background section */}
-      <section>
+      {/* <section>
         <div
           id="intro"
           className="bg-image vh-100"
@@ -103,7 +103,7 @@ const Navbar = () => {
             style={{ backgroundColor: 'rgba(250, 182, 162, 0.15)' }}
           ></div>
         </div>
-      </section>
+      </section> */}
     </header>
   );
 };
