@@ -25,7 +25,7 @@ const Register = () => {
         e.preventDefault();
     
         if (password !== cpassword) {
-            setPasswordError("Passwords do not match");   // 👈 ONLY set error, no alert
+            setPasswordError("Passwords do not match");  
             return;
         }
     

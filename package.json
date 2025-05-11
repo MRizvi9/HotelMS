@@ -9,9 +9,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bootstrap": "^4.5.2",
     "express": "^5.1.0",
     "mongoose": "^8.14.1",
     "nodemon": "^3.1.10",
+    "react-bootstrap": "^1.6.4",
     "router": "^2.2.0"
   }
 }

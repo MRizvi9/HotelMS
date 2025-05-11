@@ -1,29 +1,66 @@
-/* Color of the links BEFORE scroll */
+/* Navbar brand + links BEFORE scroll */
 .navbar-scroll .nav-link,
 .navbar-scroll .navbar-toggler-icon,
 .navbar-scroll .navbar-brand {
   color: #fff;
 }
 
-/* Color of the links AFTER scroll */
+/* Navbar brand + links AFTER scroll */
 .navbar-scrolled .nav-link,
 .navbar-scrolled .navbar-toggler-icon,
 .navbar-scrolled .navbar-brand {
   color: #fff;
 }
 
-/* Color of the navbar AFTER scroll */
+/* Navbar background AFTER scroll */
 .navbar-scroll,
 .navbar-scrolled {
   background-color: #cbbcb1;
 }
 
+/* Custom blurred navbar */
 .mask-custom {
   backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, .15);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
+/* Navbar brand style */
 .navbar-brand {
   font-size: 1.75rem;
   letter-spacing: 3px;
+}
+
+/* Clean profile link in navbar */
+.profile-link {
+  font-weight: 500;
+  color: #333 !important;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Remove underline on hover */
+.profile-link:hover {
+  text-decoration: none;
+}
+
+/* Optional tweak for dropdown arrow spacing */
+.profile-link::after {
+  margin-left: 4px;
+}
+
+/* ✅ FINAL fix → all dropdown items always brand color */
+.dropdown-menu .dropdown-item,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+  color: grey !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.dropdown-menu .dropdown-item:hover {
+  color: #5e9693 !important;
+
+  border-radius: .5rem !important;
 }
