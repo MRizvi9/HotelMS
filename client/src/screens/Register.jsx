@@ -1,15 +1,36 @@
 // src/pages/Register.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import './Register.css';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import logogo from '../assets/logo.png';
 import logomobo from '../assets/logomobo.png';
 
 const Register = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [cpassword, setCpassword] = useState('');
+
+
+function register(e) {
+        e.preventDefault();
+        if (password !== cpassword) {
+            alert("Passwords do not match");
+            return;
+        }else{
+            const user={
+                name,
+                email,
+                password,
+            }
+            console.log(user);
+        }
+
+    }
+
     return (
         <div className='auth-pages login login-page register-page'>
             <div className="item-left">
-                {/* Desktop logo */}
                 <img src={logogo} alt="Logo" className="login-logo desktop-logo" />
                 <div className="text-container">
                     <h1 className='login-bg-title'>Welcome to Our Trading Community!</h1>
@@ -30,28 +51,54 @@ const Register = () => {
             </div>
 
             <div className="item-right">
-                {/* Mobile logo */}
                 <img src={logomobo} alt="Logo" className="login-logo mobile-logo" />
                 <form className="loginForm">
                     <h1>Register</h1>
+
                     <div className='input-box'>
-                        <input type='text' placeholder='Name' required />
+                        <input type='text' placeholder='Name' required value={name}
+                            onChange={e => setName(e.target.value)} />
                         <div className='input-icon-box'><FaUser className='icon' /></div>
                     </div>
+
                     <div className='input-box'>
-                        <input type='email' placeholder='Email' required />
+                    <input
+                            type='email'
+                            placeholder='Email'
+                            required
+                            autoComplete="username"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
                         <div className='input-icon-box'><FaEnvelope className='icon' /></div>
                     </div>
 
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' required />
+                            <input
+                            type='password'
+                            placeholder='Password'
+                            required
+                            autoComplete="new-password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                             />
                         <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
+
                     <div className='input-box'>
-                        <input type='password' placeholder='Confirm Password' required />
+                    <input
+                            type='password'
+                            placeholder='Confirm Password'
+                            required
+                            autoComplete="new-password"
+                            value={cpassword}
+                            onChange={e => setCpassword(e.target.value)}
+                        />
+
                         <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
-                    <button type='submit'>Register</button>
+
+                    <button type='submit' onClick={register} >Register</button>
                     <div className='register-link'>
                         <p>Already have an account? <a href='/login'>Login</a></p>
                     </div>

@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import { FaUser, FaLock } from 'react-icons/fa';
 import logogo from '../assets/logo.png';
 import logomobo from '../assets/logomobo.png';
 
 const Login = () => {
+
+      const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
+
+
+      function login(e) {
+        e.preventDefault();
+        {
+            const user={
+                email,
+                password,
+            }
+            console.log(user);
+        }
+
+    }
     return (
         <div className='auth-pages login login-page'>
             <div className="item-left">
@@ -34,18 +50,32 @@ const Login = () => {
                 <form className="loginForm">
                     <h1>Login</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' required />
+                    <input
+                            type='email'
+                            placeholder='Email'
+                            required
+                            autoComplete="username"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
                         <div className='input-icon-box'><FaUser className='icon' /></div>
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' required />
+                    <input
+                            type='password'
+                            placeholder='Password'
+                            required
+                            autoComplete="new-password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                             />
                         <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
                     <div className="remember-forgot">
                         <label><input type='checkbox' />Remember me</label>
                         <a href='#'> forgot password</a>
                     </div>
-                    <button type='submit'>Submit</button>
+                    <button type='submit' onClick={login}>Submit</button>
                     <div className='register-link'>
                         <p>Don't Have an Account? <a href='/register'>Register</a></p>
                     </div>
