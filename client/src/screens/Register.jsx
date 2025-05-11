@@ -1,17 +1,18 @@
+// src/pages/Register.jsx
 import React from 'react';
-import './Login.css';
-import { FaUser, FaLock } from 'react-icons/fa';
+import './Register.css';
+import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import logogo from '../assets/logo.png';
 import logomobo from '../assets/logomobo.png';
 
-const Login = () => {
+const Register = () => {
     return (
-        <div className='auth-pages login login-page'>
+        <div className='auth-pages login login-page register-page'>
             <div className="item-left">
                 {/* Desktop logo */}
                 <img src={logogo} alt="Logo" className="login-logo desktop-logo" />
                 <div className="text-container">
-                    <h1 className='login-bg-title'>Some thing better is Happening in the Dark!</h1>
+                    <h1 className='login-bg-title'>Welcome to Our Trading Community!</h1>
                     <p className="login-bg-subtitle">&mdash; Cpt. Birdy</p>
                 </div>
                 <div className="pattern-container">
@@ -32,22 +33,27 @@ const Login = () => {
                 {/* Mobile logo */}
                 <img src={logomobo} alt="Logo" className="login-logo mobile-logo" />
                 <form className="loginForm">
-                    <h1>Login</h1>
+                    <h1>Register</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' required />
+                        <input type='text' placeholder='Name' required />
                         <div className='input-icon-box'><FaUser className='icon' /></div>
                     </div>
+                    <div className='input-box'>
+                        <input type='email' placeholder='Email' required />
+                        <div className='input-icon-box'><FaEnvelope className='icon' /></div>
+                    </div>
+
                     <div className='input-box'>
                         <input type='password' placeholder='Password' required />
                         <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
-                    <div className="remember-forgot">
-                        <label><input type='checkbox' />Remember me</label>
-                        <a href='#'> forgot password</a>
+                    <div className='input-box'>
+                        <input type='password' placeholder='Confirm Password' required />
+                        <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
-                    <button type='submit'>Submit</button>
+                    <button type='submit'>Register</button>
                     <div className='register-link'>
-                        <p>Don't Have an Account? <a href='/register'>Register</a></p>
+                        <p>Already have an account? <a href='/login'>Login</a></p>
                     </div>
                 </form>
             </div>
@@ -55,4 +61,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
