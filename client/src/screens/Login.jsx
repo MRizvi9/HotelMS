@@ -1,30 +1,41 @@
+// src/pages/Login.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.css';
 import { FaUser, FaLock } from 'react-icons/fa';
 import logogo from '../assets/logo.png';
 import logomobo from '../assets/logomobo.png';
+import Loader from '../components/Loader'
+import Error from '../components/Error'
+import Success from '../components/Success'
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setloading] = useState(false);
+    const [error, seterror] = useState(false);
+    const [success, setsuccess] = useState(false);
 
-      const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
-
-
-      function login(e) {
+    async function login(e) {
         e.preventDefault();
-        {
-            const user={
-                email,
-                password,
-            }
-            console.log(user);
-        }
 
+        const user = { email, password };
+        try {
+            setloading(true);
+            const result = (await axios.post('/api/user/login', user)).data;
+            setloading(false);
+            localStorage.setItem('currentUser', JSON.stringify(result));
+            window.location.href = '/home';
+        } catch (error) {
+            console.error(error);
+            setloading(false);
+            seterror(true); 
+        }
     }
+
     return (
         <div className='auth-pages login login-page'>
             <div className="item-left">
-                {/* Desktop logo */}
                 <img src={logogo} alt="Logo" className="login-logo desktop-logo" />
                 <div className="text-container">
                     <h1 className='login-bg-title'>Some thing better is Happening in the Dark!</h1>
@@ -45,12 +56,15 @@ const Login = () => {
             </div>
 
             <div className="item-right">
-                {/* Mobile logo */}
                 <img src={logomobo} alt="Logo" className="login-logo mobile-logo" />
-                <form className="loginForm">
+                {loading && <Loader />}
+            {error && <Error message="Invalid Credentials" />}
+                {success && <Success message="Registration successful! Please login." />}
+                <form className="loginForm" onSubmit={login}>
                     <h1>Login</h1>
+
                     <div className='input-box'>
-                    <input
+                        <input
                             type='email'
                             placeholder='Email'
                             required
@@ -60,22 +74,26 @@ const Login = () => {
                         />
                         <div className='input-icon-box'><FaUser className='icon' /></div>
                     </div>
+
                     <div className='input-box'>
-                    <input
+                        <input
                             type='password'
                             placeholder='Password'
                             required
-                            autoComplete="new-password"
+                            autoComplete="current-password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
-                             />
+                        />
                         <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
+
                     <div className="remember-forgot">
                         <label><input type='checkbox' />Remember me</label>
-                        <a href='#'> forgot password</a>
+                        <a href='#'>forgot password</a>
                     </div>
-                    <button type='submit' onClick={login}>Submit</button>
+
+                    <button type='submit'>Submit</button>
+
                     <div className='register-link'>
                         <p>Don't Have an Account? <a href='/register'>Register</a></p>
                     </div>

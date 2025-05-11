@@ -1,34 +1,62 @@
 // src/pages/Register.jsx
+import axios from 'axios';
 import React, { useState } from 'react';
 import './Register.css';
 import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import logogo from '../assets/logo.png';
 import logomobo from '../assets/logomobo.png';
+import Loader from '../components/Loader'
+import Error from '../components/Error'
+import Success from '../components/Success'
+import { set } from 'mongoose';
 
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [cpassword, setCpassword] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+      const [loading, setloading] = useState(false);
+      const [error, seterror] = useState(false);
+      const [success, setsuccess] = useState(false);
 
-
-function register(e) {
+    async function register(e) {
         e.preventDefault();
+    
         if (password !== cpassword) {
-            alert("Passwords do not match");
+            setPasswordError("Passwords do not match");   // 👈 ONLY set error, no alert
             return;
-        }else{
-            const user={
-                name,
-                email,
-                password,
-            }
-            console.log(user);
         }
+    
+        const user = { name, email, password };
+    
+        try {
+            setloading(true);
+            const response = await axios.post('/api/user/register', user);
+            setloading(false);
+            setsuccess(true);
+            setName('');
+            setEmail('');
+            setPassword('');
+            setCpassword('');
 
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setEmailError('Email is already registered');
+            } else {
+                setEmailError('Something went wrong');
+            }
+            console.log(error);
+            setloading(false);
+            seterror(true);
+        }
     }
+    
 
     return (
+            
+
         <div className='auth-pages login login-page register-page'>
             <div className="item-left">
                 <img src={logogo} alt="Logo" className="login-logo desktop-logo" />
@@ -52,53 +80,83 @@ function register(e) {
 
             <div className="item-right">
                 <img src={logomobo} alt="Logo" className="login-logo mobile-logo" />
+                {loading && <Loader />}
+            {error && <Error message={error} />}
+                {success && <Success message="Registration successful! Please login." />}
                 <form className="loginForm">
                     <h1>Register</h1>
 
                     <div className='input-box'>
-                        <input type='text' placeholder='Name' required value={name}
-                            onChange={e => setName(e.target.value)} />
+                        <input
+                            type='text'
+                            placeholder='Name'
+                            required
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                        />
                         <div className='input-icon-box'><FaUser className='icon' /></div>
                     </div>
 
                     <div className='input-box'>
-                    <input
+                        <input
                             type='email'
                             placeholder='Email'
                             required
                             autoComplete="username"
                             value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={e => {
+                                setEmail(e.target.value);
+                                setEmailError('');
+                            }}
                         />
                         <div className='input-icon-box'><FaEnvelope className='icon' /></div>
+
+                        {emailError && (
+                            <div className="email-error">
+                                <FaEnvelope style={{ marginRight: '5px' }} />
+                                {emailError}
+                            </div>
+                        )}
                     </div>
 
                     <div className='input-box'>
-                            <input
+                        <input
                             type='password'
                             placeholder='Password'
                             required
                             autoComplete="new-password"
                             value={password}
-                            onChange={e => setPassword(e.target.value)}
-                             />
+                            onChange={e => {
+                                setPassword(e.target.value);
+                                setPasswordError('');
+                            }}
+                        />
                         <div className='input-icon-box'><FaLock className='icon' /></div>
                     </div>
 
                     <div className='input-box'>
-                    <input
+                        <input
                             type='password'
                             placeholder='Confirm Password'
                             required
                             autoComplete="new-password"
                             value={cpassword}
-                            onChange={e => setCpassword(e.target.value)}
+                            onChange={e => {
+                                setCpassword(e.target.value);
+                                setPasswordError('');
+                            }}
                         />
-
                         <div className='input-icon-box'><FaLock className='icon' /></div>
+
+                        {passwordError && (
+                            <div className="password-error">
+                                <FaLock style={{ marginRight: '5px' }} />
+                                {passwordError}
+                            </div>
+                        )}
                     </div>
 
-                    <button type='submit' onClick={register} >Register</button>
+                    <button type='submit' onClick={register}>Register</button>
                     <div className='register-link'>
                         <p>Already have an account? <a href='/login'>Login</a></p>
                     </div>

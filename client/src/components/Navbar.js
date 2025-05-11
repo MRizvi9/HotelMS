@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import '../style.css';
 
 const Navbar = () => {
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+
   useEffect(() => {
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     const navbarCollapse = document.getElementById('navbarSupportedContent');
@@ -61,6 +63,7 @@ const Navbar = () => {
             </ul>
 
             {/* Social icons */}
+           {user ? (<><h1 style={{color:"#5e9693"}}>{user.name}</h1></>):(<>
             <ul className="navbar-nav d-flex flex-row mr-auto ">
   <li className="nav-item me-3 me-lg-2">
     <a className="nav-link" href="/login">
@@ -72,7 +75,7 @@ const Navbar = () => {
       <i className="fas fa-user-plus"></i> {/* Sign Up Icon */}
     </a>
   </li>
-</ul>
+</ul></>)}
 
           </div>
 

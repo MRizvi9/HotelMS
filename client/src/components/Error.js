@@ -1,14 +1,13 @@
 import React from 'react'
 
-const Error = () => {
-  return (
-    <div>
-      <div class="alert alert-warning" role='alert' style={{marginTop: "50px"}}>
-                An Error Accured, Please contact helpline
-      </div>
-    </div>
-  )
+function Error({ message }) {
+    return (
+        <div>
+            <div className='alert alert-danger' role='alert' style={{ marginTop: "50px" }}>
+                {message}
+            </div>
+        </div>
+    );
 }
 
 export default Error
-

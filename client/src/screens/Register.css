@@ -84,7 +84,7 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 160px;
+    width: 220px !important;
     height: auto;
 }
 
@@ -104,4 +104,12 @@
         width: 160px;
         height: auto;
     }
+}
+
+.email-error, .password-error {
+    color: #ff4d4f;  /* or any shade you like */
+    font-size: 12px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
 }
