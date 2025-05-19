@@ -39,8 +39,8 @@ const Navbar = () => {
                 <div className="container d-flex align-items-center">
                     {/* Brand */}
                     <a className="navbar-brand d-flex align-items-center" href="/home">
-                        <span style={{ color: '#5e9693' }}>Luxury</span>
-                        <span style={{ color: '#e4bd75' }}>Motel</span>
+                        <span style={{ color: '#5e9693' }}>HOTEL</span>
+                        <span style={{ color: '#e4bd75' }}>SYNC</span>
                     </a>
 
                     {/* Nav links */}
