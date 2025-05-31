@@ -4,17 +4,17 @@ import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import {Link} from 'react-router-dom'
 
-function Room({ room,fromdate, todate }) {
+function Room({ room }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
   return (
     <div className="row mt-5 bs align-items-center">
       <div className="col-md-4 ">
         <img src={room.imageurls[0]} className="smallImg" alt="room" />
-      </div> 
+      </div>
+
       <div className="col-md-8 text-left">
         <h1>{room.name}</h1>
         <b>
@@ -23,12 +23,13 @@ function Room({ room,fromdate, todate }) {
         <p>Category: {room.type}</p>
         </b>
         <div style={{float:'right'}}>
-        <Link to={`/book/${room._id}/${fromdate}/${todate}`}> 
+        <Link to={`/book/${room._id}`}>
           <button className="btn btn-gold mx-4">Book Now</button>
           </Link>
             <button className='btn ' onClick={handleShow}>View Details</button>
         </div>
-        </div>
+      </div>
+
       <Modal show={show} onHide={handleClose} animation={false} size='lg'>
         <Modal.Header >
           <Modal.Title>{room.name}</Modal.Title>
