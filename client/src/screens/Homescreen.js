@@ -7,12 +7,15 @@ import { DatePicker } from "antd";
 import "antd/dist/reset.css";
 import "./Datepicker.css"; 
 import "../App.css"
-const { RangePicker } = DatePicker;
+const { RangePicker, } = DatePicker;
 
 const Homescreen = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setloading] = useState();
   const [error, seterror] = useState();
+  const [fromdate, setfromdate] = useState([]);
+  const [todate, settodate] = useState([]);
+
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -31,11 +34,12 @@ const Homescreen = () => {
     fetchRooms();
   }, []);
 
-  function filterByDate(dates) {
-    console.log(dates);
-  }
-
-
+ function filterByDate(dates) {
+  const fromdate = dates[0].format("DD-MM-YYYY");
+  const todate = dates[1].format("DD-MM-YYYY");
+  setfromdate(fromdate);
+  settodate(todate);
+}
   return (
     <div className="container mt-5">
       {/* Date Range Picker Centered */}
@@ -55,7 +59,7 @@ const Homescreen = () => {
         ) : rooms.length > 0 ? (
           rooms.map((room) => (
             <div className="col-md-9" key={room._id}>
-              <Room room={room} />
+              <Room room={room} fromdate={fromdate} todate={todate} />
             </div>
           ))
         ) : (
