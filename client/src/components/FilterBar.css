@@ -1,0 +1,118 @@
+/* ========== GENERAL STYLING ========== */
+.filter-bar-wrapper {
+  border-radius: 8px;
+  z-index: 999;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+.
+
+/* Full-width responsive form controls */
+.filter-bar-wrapper .form-control,
+.filter-bar-wrapper .ant-picker,
+.filter-bar-wrapper .btn {
+  width: 100%;
+  border-color: #5e9693;
+  
+}
+
+/* Blur background */
+.mask-custom {
+  backdrop-filter: blur(10%);
+  background-color: rgba(237, 229, 229, 0);
+}
+
+/* ========== DESKTOP: STICKY + BLUR ========== */
+@media (min-width: 768px) {
+  .filter-bar-wrapper {
+    position: sticky;
+    top: 65px; /* Adjust based on navbar height */
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* ========== MOBILE: STACKED & SPACED ========== */
+@media (max-width: 767.98px) {
+  .filter-bar-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .filter-bar-wrapper .row > div {
+    margin-bottom: 12px; /* spacing between items */
+  }
+}
+
+/* ========== DROPDOWN (FILTER) ========== */
+.dropdown-card {
+  position: absolute;
+  right: 0;
+  top: 105%;
+  width: 100%;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== FILTER TAGS ========== */
+.filter-chip {
+  background-color: #e4bd75;
+  color: #495057;
+  padding: 6px 12px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.remove-icon {
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 0.75rem;
+}
+
+/* ========== DROPDOWN SELECT FIXES ========== */
+.dropdown-card select.form-select {
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.dropdown-card select.form-select:focus,
+.dropdown-card select.form-select:hover {
+  border-color: #5e9693;
+  box-shadow: 0 0 0 2px rgba(94, 150, 147, 0.25);
+  outline: none;
+}
+
+/* Remove default blue hover/select */
+.dropdown-card select.form-select option:hover {
+  background-color: #e4bd75 !important;
+  color: white !important;
+}
+@media (max-width: 767.98px) {
+  .filter-bar-wrapper {
+    margin-top:15% !important; 
+    margin-bottom: 0% !important;
+    position: static !important;
+    backdrop-filter: none !important;
+    background-color: #fff !important;
+  }
+}

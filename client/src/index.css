@@ -30,6 +30,13 @@ code {
   box-shadow: none !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+.btn2 {
+  background-color: #e4bd75;
+  color: white;
+  border: 1px solid transparent;
+  box-shadow: none !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 .btn:hover,
 .btn:focus:hover {

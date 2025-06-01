@@ -17,9 +17,15 @@ const roomSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  imageurls: [],  
-  currentbookings: [],
-  type: {
+  imageurls: {
+    type: [String],
+    required: true,
+  },
+  currentbookings: {
+    type: [Object],
+    default: [],
+  },
+  category: {
     type: String,
     required: true,
   },
@@ -27,8 +33,11 @@ const roomSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-
+  location: {
+    type: String,
+    required: true,
+  },
 });
 
-const roomModel = mongoose.model('rooms',roomSchema)
-module.exports = roomModel
+const roomModel = mongoose.model("rooms", roomSchema);
+module.exports = roomModel;

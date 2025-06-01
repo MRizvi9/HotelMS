@@ -1,95 +1,116 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
+import {
+  MdLocationOn, MdWifi, MdLocalParking, MdRoomService,
+  MdPool, MdSpa, MdFitnessCenter, MdTheaters,
+  MdPhone, MdGroups, MdCurrencyRupee
+} from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+import './RoomFlipCard.css';
 
 function Room({ room, fromdate, todate, available }) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const isMobile = window.innerWidth < 768;
+
+  const handleMobileFlip = () => {
+    if (isMobile) setIsFlipped(!isFlipped);
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % room.imageurls.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + room.imageurls.length) % room.imageurls.length);
+  };
+
+  const renderPerks = (category) => {
+    const activePerks = {
+      Economy: [{ icon: <MdWifi />, label: "WiFi" }],
+      Business: [
+        { icon: <MdWifi />, label: "WiFi" },
+        { icon: <MdLocalParking />, label: "Parking" },
+        { icon: <MdRoomService />, label: "Room Service" }
+      ],
+      Luxury: [
+        { icon: <MdWifi />, label: "WiFi" },
+        { icon: <MdLocalParking />, label: "Parking" },
+        { icon: <MdRoomService />, label: "Room Service" },
+        { icon: <MdPool />, label: "Pool" },
+        { icon: <MdSpa />, label: "Spa" },
+        { icon: <MdFitnessCenter />, label: "Gym" },
+        { icon: <MdTheaters />, label: "Theatre" }
+      ]
+    };
+
+    return (
+      <div className="perks-icons">
+        {activePerks[category]?.map((perk, idx) => (
+          <div key={idx}>{perk.icon}<span>{perk.label}</span></div>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <div className="row mt-5 bs align-items-center position-relative">
-      
-      {/* Not Available Badge - Top Right */}
-      {fromdate && todate && !available && (
-        <span
-          style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            backgroundColor: '#f8d7da',
-            color: '#D0312D',
-            padding: '4px 10px',
-            borderRadius: '20px',
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            zIndex: 1000
-          }}
-        >
-          Not Available
-        </span>
-      )}
 
-      <div className="col-md-4">
-        <img src={room.imageurls[0]} className="smallImg" alt="room" />
-      </div>
-
-      <div className="col-md-8 text-left">
-        <h1>{room.name}</h1>
-        <b>
-          <p>Max Count: {room.maxcount}</p>
-          <p>Phone: {room.phonenumber}</p>
-          <p>Category: {room.type}</p>
-        </b>
-
-        <div style={{ float: 'right' }}>
-          {fromdate && todate ? (
-            available ? (
-              <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
-                <button className="btn btn-gold mx-4">Book Now</button>
-              </Link>
-            ) : null
-          ) : (
-            <span
-              style={{
-                color: '#6c757d',
-                fontSize: '0.8rem',
-                padding: '4px 10px',
-                borderRadius: '50px',
-                marginRight: '10px',
-                fontWeight: 500
-              }}
-            >
-              Select date range
-            </span>
-          )}
-          <button className="btn" onClick={handleShow}>View Details</button>
+    <div className={`flip-card ${isFlipped ? 'flipped' : ''}`} onClick={handleMobileFlip}>
+      <div className="flip-card-inner ">
+        {/* FRONT */}
+        <div className="flip-card-front">
+          <img src={room.imageurls[0]} alt={room.name} />
+          <div className="gradient-overlay"></div>
+          <div className={`front-category ${room.category.toLowerCase()}`}>{room.category}</div>
+          <div className="front-content">
+            <h5>{room.name}</h5>
+            <p><MdLocationOn /> {room.location}</p>
+          </div>
+          <div className="front-actions">
+            <div className={`front-availability ${!available ? 'unavailable' : ''}`}>
+              {fromdate && todate ? (available ? 'Available' : 'Not Available') : 'Select dates'}
+            </div>
+            <button className="view-btn" onClick={(e) => { e.stopPropagation(); setIsFlipped(true); }}>
+              <FaEye /> View More
+            </button>
+          </div>
         </div>
+
+        {/* BACK */}
+        <div className="flip-card-back">
+          <div className="back-left">
+            <img src={room.imageurls[currentImageIndex]} alt="slider" />
+            <div className="slider-btns">
+              <button onClick={(e) => { e.stopPropagation(); handlePrev(); }}>‹</button>
+              <button onClick={(e) => { e.stopPropagation(); handleNext(); }}>›</button>
+            </div>
+          </div>
+          <div className="back-right">
+            <div>
+              <h6>{room.name}</h6>
+              <p className="category-pill">{room.category}</p>
+              {renderPerks(room.category)}
+              <div className="info-line"><MdLocationOn color="#5e9693" /><span>{room.location}</span></div>
+<div className="info-line"><MdGroups color="#5e9693" /><span>Max Count: {room.maxcount}</span></div>
+<div className="info-line"><MdPhone color="#5e9693" /><span>{room.phonenumber}</span></div>
+<div className="info-line"><MdCurrencyRupee color="#5e9693" /><span>Rent: ₹{room.rentperday}/day</span></div>
+
+            </div>
+            <div className="room-buttons">
+              {fromdate && todate && available && (
+                <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
+                  <button className="btn btn-gold btn-sm">Book Now</button>
+                </Link>
+              )}
+              <button className="btn btn-outline-dark btn-sm" onClick={(e) => { e.stopPropagation(); setIsFlipped(false); }}>
+                Back
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      {/* Modal */}
-      <Modal show={show} onHide={handleClose} animation={false} size='lg'>
-        <Modal.Header>
-          <Modal.Title>{room.name}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Carousel fade>
-            {room.imageurls.map((url, i) => (
-              <Carousel.Item key={i}>
-                <img className='d-block w-100 bigimg' src={url} alt={`slide-${i}`} />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-          <p>{room.description}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }

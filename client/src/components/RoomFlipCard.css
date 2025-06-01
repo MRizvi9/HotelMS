@@ -1,0 +1,175 @@
+.flip-card {
+  perspective: 1000px;
+  width: 100%;
+  height: 340px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.front-category {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.front-category.economy { background: #d4edda; color: #000; }
+.front-category.business { background: #5e9693; color: #fff; }
+.front-category.luxury { background: #e4bd75; color: #fff; }
+
+.front-content {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+}
+.front-content h5 { margin: 0 0 2px 0; }
+
+.front-actions {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.front-availability {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #fff;
+  color: #28a745;
+}
+.front-availability.unavailable { color: #dc3545; }
+
+.view-btn {
+  background: #fff;
+  border: none;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.3s;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  background: #f8f9fa;
+  flex-direction: row;
+}
+
+.back-left {
+  width: 60%;
+  position: relative;
+}
+.back-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slider-btns {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.slider-btns button {
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-left: 5px;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.back-right {
+  width: 40%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-pill {
+  margin: 8px 0 6px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #000;
+}
+
+.perks-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+.perks-icons div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #444;
+}
+
+.room-info p {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.room-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: auto;
+}
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}

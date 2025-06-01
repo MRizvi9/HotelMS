@@ -1,3 +1,6 @@
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
 /* Custom container styling */
 .custom-datepicker .ant-picker {
   border-color: #d9d9d9;
@@ -144,4 +147,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+.filter-bar select,
+.filter-bar input {
+  min-width: 160px;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+  border-color: #5e9693;
+  box-shadow: 0 0 0 0.15rem rgba(94, 150, 147, 0.25);
 }

@@ -1,66 +1,213 @@
-/* Navbar brand + links BEFORE scroll */
-.navbar-scroll .nav-link,
-.navbar-scroll .navbar-toggler-icon,
-.navbar-scroll .navbar-brand {
-  color: #fff;
+  /* === Primary Theme Colors === */
+  :root {
+    --ant-green: #5e9693;
+    --ant-gold: #e4bd75;
+  }
+  .ant-picker-year-btn,.ant-picker-month-btn:hover{
+    color:#5e9693 !important ;  
+  }
+  /* Selected date styles */
+  .ant-picker-cell-selected .ant-picker-cell-inner,
+  .ant-picker-cell-range-start .ant-picker-cell-inner,
+  .ant-picker-cell-range-end .ant-picker-cell-inner {
+    background-color: var(--ant-gold) !important;
+    color: white !important;
+    font-weight: 600;
+  }
+
+  /* Range background */
+  .ant-picker-cell-in-range::before {
+    background: rgba(94, 150, 147, 0.2) !important;
+  }
+
+  /* Hover state for dates */
+  .ant-picker-cell-inner:hover {
+    border: 1px solid var(--ant-gold) !important;
+  }
+
+  /* Rounded edges for date range */
+  .ant-picker-cell-range-start:not(.ant-picker-cell-range-end) .ant-picker-cell-inner {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  .ant-picker-cell-range-end:not(.ant-picker-cell-range-start) .ant-picker-cell-inner {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+
+  /* Calendar bar under input */
+  .ant-picker-active-bar {
+    background-color: var(--ant-gold) !important;
+  }
+
+  /* Input icon color */
+  .ant-picker-suffix {
+    color: var(--ant-green) !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  /* Focus and hover state for input field */
+  .ant-picker,
+  .ant-picker:hover,
+  .ant-picker-focused,
+  .ant-picker-hover {
+    border-color: var(--ant-green) !important;
+    box-shadow: 0 0 0 2px rgba(94, 150, 147, 0.25) !important;
+    outline: none !important;
+  }
+
+  /* === Custom Navbar Dropdown === */
+  .custom-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: grey;
+    transition: color 0.2s ease;
+  }
+
+  .custom-toggle .icon {
+    font-size: 1rem;
+    color: grey;
+  }
+  .custom-toggle .icon:hover {
+    color: var(--ant-green);
+    font-weight: 600;
+  }
+
+  .custom-toggle .username {
+    font-weight: 500;
+  }
+  .custom-toggle .username:hover {
+    color: var(--ant-green);
+    font-weight: 600;
+  }
+
+  .dropdown-arrow {
+    font-size: 0.65rem;
+    color: grey;
+  }
+  .dropdown-arrow:hover {
+    color: var(--ant-green);
+  }
+
+  /* Dropdown menu */
+  .dropdown-content-custom {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    z-index: 9999;
+    min-width: 150px;
+    overflow: hidden;
+    animation: fadeSlideDown 0.2s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Dropdown items */
+  .dropdown-item-custom {
+    padding: 10px 15px;
+    color: grey;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+
+  .dropdown-item-custom:hover {
+    color: var(--ant-green);
+  }
+
+  /* Animation for dropdown */
+  @keyframes fadeSlideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+/* === Mobile Side Panel === */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 55%; /* was 70% */
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1050;
+  padding: 1.5rem 1rem;
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Navbar brand + links AFTER scroll */
-.navbar-scrolled .nav-link,
-.navbar-scrolled .navbar-toggler-icon,
-.navbar-scrolled .navbar-brand {
-  color: #fff;
+.mobile-menu.open {
+  right: 0;
 }
 
-/* Navbar background AFTER scroll */
-.navbar-scroll,
-.navbar-scrolled {
-  background-color: #cbbcb1;
+.menu-header {
+  display: flex;
+  justify-content: flex-end;
 }
 
-/* Custom blurred navbar */
-.mask-custom {
-  backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Navbar brand style */
-.navbar-brand {
-  font-size: 1.75rem;
-  letter-spacing: 3px;
-}
-
-/* Clean profile link in navbar */
-.profile-link {
-  font-weight: 500;
-  color: #333 !important;
+.close-icon {
+  font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
-  display: inline-flex;
-  align-items: center;
+  color: #333;
 }
 
-/* Remove underline on hover */
-.profile-link:hover {
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  flex: 1;
+}
+
+.mobile-nav-links li {
+  margin-bottom: 1.2rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav-links a {
+  color: var(--ant-green);
+  font-weight: 600;
   text-decoration: none;
+  font-size: 1.1rem;
 }
 
-/* Optional tweak for dropdown arrow spacing */
-.profile-link::after {
-  margin-left: 4px;
+.mobile-nav-links li:hover {
+  transform: translateX(5px);
+  color: var(--ant-gold);
 }
 
-/* ✅ FINAL fix → all dropdown items always brand color */
-.dropdown-menu .dropdown-item,
-.dropdown-menu .dropdown-item:focus,
-.dropdown-menu .dropdown-item:active {
-  color: grey !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
+.logout-link {
+  display: flex;
+  align-items: center;
+  color: #444;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+  margin-bottom: 1rem;
 }
-.dropdown-menu .dropdown-item:hover {
-  color: #5e9693 !important;
 
-  border-radius: .5rem !important;
+.logout-link:hover {
+  color: #e4bd75;
+  transform: translateX(5px);
+  cursor: pointer;
 }

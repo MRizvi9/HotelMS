@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Navbar from './components/Navbar';
 import Homescreen from './screens/Homescreen';
 import Bookingscreen from './screens/Bookingscreen';
@@ -6,6 +7,7 @@ import './App.css';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import { Layout } from './layout/Layout';
+import Reservations from './screens/Reservations';
 function App() {
   return (
     <div className="App">
@@ -18,6 +20,8 @@ function App() {
           </Route>
           <Route path='/register' element={<Register/>}/>
           <Route exect path='/login' element={<Login/>}/>
+          <Route path="/reservations" element={<Reservations />} />
+
         </Routes>
       </BrowserRouter>
     </div>
